@@ -15,3 +15,18 @@ def spendings(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+@api_view(['GET','PUT','DELETE'])
+def spending_details(request, id):
+
+    try:
+        spending = Spending.objects.get(pk=id)
+    except Spending.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = SpendingSerializer(spending)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        pass
+    elif request.method == 'DELETE':
+        pass

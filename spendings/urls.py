@@ -20,4 +20,5 @@ from spendings import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('spendings/', views.spendings),
+    path('spendings/<int:id>', views.spending_details),
 ]
