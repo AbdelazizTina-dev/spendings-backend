@@ -27,6 +27,11 @@ def spending_details(request, id):
         serializer = SpendingSerializer(spending)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        pass
+        serializer = SpendingSerializer(spending, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
-        pass
+        spending.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
