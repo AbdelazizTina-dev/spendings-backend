@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status 
 
 @api_view(['GET','POST'])
-def spendings(request):
+def spendings(request, format=None):
     if request.method == 'GET':
         spendings_list = Spending.objects.all()
         serializer = SpendingSerializer(spendings_list, many=True)
@@ -16,7 +16,7 @@ def spendings(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 @api_view(['GET','PUT','DELETE'])
-def spending_details(request, id):
+def spending_details(request, id, format=None):
 
     try:
         spending = Spending.objects.get(pk=id)
